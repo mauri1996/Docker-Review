@@ -1,0 +1,19 @@
+// siempre se inicia con un FROM
+// siempre usar el tag
+FROM nombreImagen:Tag
+    - FROM node:12.22.1-alpine3.11
+// alpine3 -> disctribucion de linux pensada para contenedores, debido a que es liviana
+
+
+// declarar donde hacer el trabajo
+WORK /app  
+
+// copiar todos los archivos que esten donde esta el dockerFile a /app dentro del docker
+COPY . .
+
+// complia todo el codigo de node
+RUN yarn install --production
+
+// Especififdar los comando a correr
+CMD ["node","app/src/index.js"]
+

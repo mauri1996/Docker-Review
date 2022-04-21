@@ -1,0 +1,67 @@
+hub.docker.com -> repositorio de docker
+// se debe manejar en diferentes contenedores, el sistema y la db
+
+// LOS DATOS DEBEN SER DESCARTABLES
+
+Tag-> usan para difereniar versiones
+
+// descarga y corre una imagen de docker 
+docker run postgres:nombreTag
+
+// COMANDOS
+docker pull nombreImagen-> descarga pero no la corre
+
+docker run nombreImagen -> descarga y la corre
+
+docker images -> todas las imagenes;  se puede usar docker images | head -> para que se muestre solo las primeras
+
+dokcer ps -> contenedores que estas corriendo
+
+docker ps -a -> todos los que han sido corridos -> aparecer containerId
+
+docker start containerId -> inicia el contenedor en background
+
+docker stop containerId -> para el contenedor
+
+docker logs containerId -> muestra los logs del docker
+
+docker exec -> ejecuta un comando dentro de un contendor que esta corriendo ejemplo:
+    docker exec -it containerId sh
+    // -i -> crear uan sesion itereactiva
+    // t -> emula una terminal
+    ---------> esto hara que se habra una terminal con la que se puede usar cualquier comando ls, ejecuta
+
+docker run -d nombreImagen -> Corre en 2 plano la imagen
+
+
+// construir el contenedor
+
+docker build . -> lo ideal es tagear:
+    docker build -t getting-started .
+
+
+// correr imagen
+// pero al inicar asi, no hay comunicacion con el exterior se debe definir un puerto
+docker run getting-started
+    // se debe iniciar asi:
+    - docker run -dp 3000:3000 getting-started
+    // -p expone el puerto
+    // -d inicie en background
+
+// detener 
+// obtener el containerId
+docker ps 
+
+docker stop containerId
+
+
+
+
+
+
+
+
+
+
+
+

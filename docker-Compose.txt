@@ -1,0 +1,69 @@
+// (ya deberia venir este archivo)
+// se debe crear un docker-compose.yaml
+
+version: "3.7"
+
+services:
+  app:
+    image: pablokbs/getting-started:v2
+    ports:
+      - 3000:3000
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: todos
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - ./todo-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: todos
+
+
+// PARTES
+
+// la version usada
+version: "3.7"
+
+// servicios -> es donde estaran todos los servicios en una misma red
+
+services:
+
+// nombre del servicio (el alias)
+app:
+
+    // contenido del servicio
+    image: mauri1996/getting-started:v2  // imagen a usar
+    ports: // puerto a usar
+      - 3000:3000
+    environment: // las variables que se envias como -e
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: todos
+
+
+  mysql: (alias)
+    image: mysql:5.7 (iamgen a usar)
+    volumes: (volumen a usar)
+      - ./todo-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: todos
+
+// mucho mas ordenado
+
+// EJECUTAr
+
+// comando docker-compose
+// up -> levanta los servicios
+// -d en background
+    - docker-compose up -d 
+
+    // se puede usar docker-compose up -d varias veces hasta que inicie todos los servicios
+
+// FRENAR
+    -   docker-compose down 

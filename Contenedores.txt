@@ -1,0 +1,37 @@
+// OJO cada vez que se iniciar con (docker run) -> se crea una instancia nueva
+
+// manejar persistencia - VOLUMENES
+// hace que se comparta de manera bidireccional la carpeta todos en etc de la carpeta local (es dnde esta la db)
+docker run -d -v pathLocal:pathDocker -p 3000:3000 nombreImagen
+    docker run -d -v C:\Users\USUARIO\Desktop\Docker\docker-curso\app\etc:/etc/todos -p 3000:3000 getting-started
+
+// se realiza cambios sin reconstruir la imagen
+
+// crear nuevo volumen con los recursos
+// permite que todos los cambios que haga desde local se repercuta en el docker
+    docker run -d -v C:\Users\USUARIO\Desktop\Docker\docker-curso\app\etc:/etc/todos -p 3000:3000 -v C:\Users\USUARIO\Desktop\Docker\docker-curso\app\src:/app/src getting-started
+
+// ahora cada ve que modifique el codigo dentro de src desde local, se vera repercutido en el docker
+
+// una vez que se cambia las cosas se debe volver a buildear la imagen para que tenga esos cambios
+
+docker build -t getting-started:v2 .
+
+
+// SUBIR IMAGEN AL REPOSITORIO DE Docker
+
+// Para subir primero debe el nombre de la imgen tener este formato:
+    - nombreUsuario/nombreImagen
+
+// para cambiar el nombre :
+    -  docker tag imageId nombreUsuario/nombreImgen:tag
+    - docker tag c1c8e19b55e4 mauri1996/getting-started:v2
+
+// subir al REPOSITORIO
+docker push nombreImagen
+    -   docker push mauri1996/getting-started:v2
+
+// LOGEO
+docker login
+
+
